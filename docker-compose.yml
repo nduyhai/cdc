@@ -1,0 +1,15 @@
+version: '3.1'
+
+services:
+  mysqldb:
+#    image: mysql:5.7.37 #amd
+    image: beercan1989/arm-mysql #arm
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: identity
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: example
+    ports:
+      - "3306:3306"
+#GRANT ALL PRIVILEGES ON *.* TO 'identity'@'172.18.0.1' IDENTIFIED BY 'password' with grant option
