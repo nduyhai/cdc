@@ -5,3 +5,30 @@ spring:
     url: jdbc:mysql://localhost:3306/example
     username: identity
     password: password
+logging:
+  level:
+    org:
+      springframework:
+        transaction: DEBUG
+        security: DEBUG
+        web: DEBUG
+        sql: DEBUG
+
+config:
+  debezium:
+    name: engine
+    connector:
+      class: io.debezium.connector.mysql.MySqlConnector
+    offset.storage: org.apache.kafka.connect.storage.FileOffsetBackingStore
+    offset.storage.file.filename: /tmp/cdc/offsets.dat
+    offset.flush.interval.ms: "60000"
+    database:
+      hostname: localhost
+      port: 3306
+      user: identity
+      password: password
+      id: 85744
+      server:
+        name: propzy-app-connector
+    database.history: io.debezium.relational.history.FileDatabaseHistory
+    database.history.file.filename: /tmp/cdc/dbhistory.dat
